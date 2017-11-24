@@ -4,6 +4,7 @@
 import string
 import sys
 
+
 # prompt asking user for preferred game difficulty level. play_game()
 # runs based off user's decision.
 def user_input():
@@ -61,14 +62,14 @@ hard_answers = ["hedgehog", "shrew", "array", "ball"]
 
 # Checks to see if user input (i.e. guess) matches the answer
 def test(guess, word_to_replace, level_answers):
-# Inputs:
-#   guess: guess user supplied in play_game() as user_input
-#   word_to_replace: the word in the string (i.e. __1__) to be replaced
-#   level_answers: the correct answers, based on chosen level
-# Behavior:
-#   Compares user_input against correct answer for chosen level
-# Output:
-#   True for success, False otherwise.
+    # Inputs:
+    #   guess: guess user supplied in play_game() as user_input
+    #   word_to_replace: the word in the string (i.e. __1__) to be replaced
+    #   level_answers: the correct answers, based on chosen level
+    # Behavior:
+    #   Compares user_input against correct answer for chosen level
+    # Output:
+    #   True for success, False otherwise.
     word_no_punctuation = word_to_replace.translate(None, string.punctuation)
     replacement_word = int(word_no_punctuation) - 1
     count = 0
