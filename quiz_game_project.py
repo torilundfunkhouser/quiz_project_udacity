@@ -61,15 +61,15 @@ hard_answers = ["hedgehog", "shrew", "array", "ball"]
 
 
 # Checks to see if user input (i.e. guess) matches the answer
+# Inputs:
+#   guess: guess user supplied in play_game() as user_input
+#   word_to_replace: the word in the string (i.e. __1__) to be replaced
+#   level_answers: the correct answers, based on chosen level
+# Behavior:
+#   Compares user_input against correct answer for chosen level
+# Output:
+#   True for success, False otherwise.
 def test(guess, word_to_replace, level_answers):
-    # Inputs:
-    #   guess: guess user supplied in play_game() as user_input
-    #   word_to_replace: the word in the string (i.e. __1__) to be replaced
-    #   level_answers: the correct answers, based on chosen level
-    # Behavior:
-    #   Compares user_input against correct answer for chosen level
-    # Output:
-    #   True for success, False otherwise.
     word_no_punctuation = word_to_replace.translate(None, string.punctuation)
     replacement_word = int(word_no_punctuation) - 1
     count = 0
@@ -85,6 +85,8 @@ def test(guess, word_to_replace, level_answers):
 
 
 # If user guesses incorrectly, gives user one more try
+# Inputs and behavior: same inputs and behavior as in test()
+# Output: True for success, exit program otherwise.
 def incorrect_answer(guess, word_to_replace, level_answers):
     word_no_punctuation = word_to_replace.translate(None, string.punctuation)
     replacement_word = int(word_no_punctuation) - 1
@@ -97,8 +99,19 @@ def incorrect_answer(guess, word_to_replace, level_answers):
 
 
 # A player is prompted to replace words in mad_lib with their own words.
-def play_game(mad_lib, parts_of_speech, answers):
+# Inputs:
+#   mad_lib: easy, medium, or hard answer paragraphs
+#   word_to_replace: word in paragraph to be replaced
+#   answers: easy, medium, or hard answers for word_to_replace
+# Behavior:
+#   prompt user to guess, run test() from their input
+# Output:
+#   if output of test() is True, replace word_to_replace
+#   with guess and run for each word in game_words.
+#   if False, run incorrect_answer()
+def play_game(mad_lib, word_to_replace, answers):
     current_answer = mad_lib
+    #   splits the string into separate words
     mad_lib = mad_lib.split()
     for game_word in game_words:
         user_input = raw_input(
@@ -111,6 +124,7 @@ def play_game(mad_lib, parts_of_speech, answers):
                 "What should be substituted in for:"
                 " " + game_word + " ")
             result = incorrect_answer(guess, game_word, answers)
+        #   replaces word_to_replace with user's correct guess
         current_answer = current_answer.replace(game_word, guess)
         print current_answer
     print 'Congrats! Your result: '
